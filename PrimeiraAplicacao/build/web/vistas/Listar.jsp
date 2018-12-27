@@ -41,6 +41,7 @@
                         <td><%= p.getNome()%></td>
                         <td>
                             <a href="Controlador?accion=remover&id=<%= p.getId()%>">Deletar</a>
+                             <a href="Controlador?accion=atualiza&id=<%= p.getId()%>">Editar</a>
                         </td>
                     </tr>
                     <%}%>

@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Controlador extends HttpServlet {
 String listar = "vistas/Listar.jsp";
 String Adicionar = "vistas/Add.jsp";
+String Editar = "vistas/Atualizar.jsp";
 PessoasDAO dao = new PessoasDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,22 +34,6 @@ PessoasDAO dao = new PessoasDAO();
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Controlador</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Controlador at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -79,11 +64,21 @@ PessoasDAO dao = new PessoasDAO();
         int id = Integer.parseInt(request.getParameter("id"));
         dao.DeletarPessoa(id);
         acesso = listar;
-        
+       }
+       else if(action.equalsIgnoreCase("atualiza")){
+        request.setAttribute("id",request.getParameter("id"));   
+        acesso = Editar;
+       }
+       else if(action.equalsIgnoreCase("editar")){
+          int id = Integer.parseInt(request.getParameter("txtId"));
+          String Nome = request.getParameter("txtNome");
+          dao.AtualizaPessoa(id, Nome);
+          acesso = listar;
        }
        RequestDispatcher vista = request.getRequestDispatcher(acesso);
        vista.forward(request, response);
     }
+}
     
 
     /**
@@ -94,20 +89,4 @@ PessoasDAO dao = new PessoasDAO();
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
-}
+    

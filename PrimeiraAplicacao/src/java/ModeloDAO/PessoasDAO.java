@@ -58,4 +58,30 @@ public class PessoasDAO {
     }catch(Exception e){
     }
     }
+        public Pessoa PessoaId(int id)
+    {
+        Pessoa p = new Pessoa();
+        String sql = "SELECT * FROM PESSOA WHERE Id = "+id+"";
+        try{            
+           Connection conn = cn.Conexao();
+          Statement statment = conn.createStatement();
+          ResultSet result = statment.executeQuery(sql);
+          while(result.next()){          
+          p.setId(result.getInt("Id"));
+          p.setNome(result.getString("Nome"));         
+          }
+        } catch (Exception e) {
+        }
+        return p;
+    }
+        public void AtualizaPessoa(int id, String nome){
+    String sql = "UPDATE PESSOA SET NOME = '"+nome+"' WHERE Id = "+id+"";
+    try{
+       Connection conn = cn.Conexao();
+       PreparedStatement executa = conn.prepareStatement(sql);
+       executa.executeUpdate();
+    }catch(Exception e){
+    }
+    }
+
 }
