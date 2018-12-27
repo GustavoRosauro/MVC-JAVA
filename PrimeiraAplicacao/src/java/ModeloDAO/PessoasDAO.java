@@ -38,7 +38,6 @@ public class PessoasDAO {
           list.add(p);
           }
         } catch (Exception e) {
-             JOptionPane.showMessageDialog(null, "Erro no SQL", "Ocorreu um erro no banco de dados", JOptionPane.INFORMATION_MESSAGE);
         }
         return list;
     }
@@ -48,8 +47,7 @@ public class PessoasDAO {
        Connection conn = cn.Conexao();
        PreparedStatement executa = conn.prepareStatement(sql);
        executa.executeUpdate();
-    }catch(Exception e){
-         JOptionPane.showMessageDialog(null, "Erro no SQL", "Ocorreu um erro no banco de dados", JOptionPane.INFORMATION_MESSAGE);
+    }catch(Exception e){    
     }
     }
     public void DeletarPessoa(int id){
@@ -59,7 +57,6 @@ public class PessoasDAO {
        PreparedStatement executa = conn.prepareStatement(sql);
        executa.executeUpdate();
     }catch(Exception e){
-         JOptionPane.showMessageDialog(null, "Erro no SQL", "Ocorreu um erro no banco de dados", JOptionPane.INFORMATION_MESSAGE);
     }
     }
         public Pessoa PessoaId(int id)
@@ -75,7 +72,6 @@ public class PessoasDAO {
           p.setNome(result.getString("Nome"));         
           }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro no SQL", "Ocorreu um erro no banco de dados", JOptionPane.INFORMATION_MESSAGE);
         }
         return p;
     }
@@ -86,7 +82,6 @@ public class PessoasDAO {
        PreparedStatement executa = conn.prepareStatement(sql);
        executa.executeUpdate();
     }catch(Exception e){
-         JOptionPane.showMessageDialog(null, "Erro no SQL", "Ocorreu um erro no banco de dados", JOptionPane.INFORMATION_MESSAGE);
     }
     }
 
