@@ -45,7 +45,14 @@
                         <td>
                             <a href="Controlador?accion=remover&id=<%= p.getId()%>" class="btn btn-danger">Deletar</a>
                             <a href="Controlador?accion=atualiza&id=<%= p.getId()%>" class="btn btn-warning">Editar</a>
-                        </td>
+                            <form method="post" action="PDFController" enctype="multipart/form-data"> 
+                     
+                    <input type="file" name="photo"/>
+                    <input type="number" name="txtId" value="<%= p.getId()%>" hidden="True">
+                   <input type="submit" value="Save">
+                        </form>
+                   <a href="PDFController?accion=Dowload&id=<%= p.getId()%>" class="btn btn-primary">Download</a>
+                   </td>
                     </tr>
                     <%}%>
                 </tbody>
